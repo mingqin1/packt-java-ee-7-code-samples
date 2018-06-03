@@ -3,15 +3,19 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
              version="2.1">
-    <persistence-unit name="primary">
+    <persistence-unit name="ticketAgencyPU"  transaction-type="JTA">
+         <jta-data-source>java:/TicketAgencyDS</jta-data-source>
         <class>com.packtpub.wflydevelopment.chapter5.entity.Seat</class>
         <class>com.packtpub.wflydevelopment.chapter5.entity.SeatType</class>
 
         <properties>
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="javax.persistence.schema-generation.database.action" value="none"/>
             <property name="javax.persistence.schema-generation-target" value="scripts"/>
             <property name="javax.persistence.ddl-create-script-target" value="createSeats.sql"/>
             <property name="javax.persistence.ddl-drop-script-target" value="dropSeats.sql"/>
+             <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.generate_statistics" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>
