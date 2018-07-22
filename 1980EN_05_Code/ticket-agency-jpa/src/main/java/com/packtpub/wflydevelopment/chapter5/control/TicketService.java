@@ -8,7 +8,7 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.logging.Logger;
-
+import com.packtpub.wflydevelopment.chapter5.util.DataType;
 // The @Stateless annotation eliminates the need for manual transaction demarcation
 @Stateless
 public class TicketService {
@@ -50,6 +50,15 @@ public class TicketService {
         seat.setBooked(true);
         seatDao.persist(seat);
         seatEventSrc.fire(seat);
+        Object obj= null;
+        try{
+           obj = Class.forName(DataType.getEnumByVal("SEAT").getClassByType().getCanonicalName()).newInstance();  
+           seatDao.getEntityManager().persist(obj);
+          
+        }catch ( Exception ex){
+            
+        }
+       
     }
 
     public void doCleanUp() {
